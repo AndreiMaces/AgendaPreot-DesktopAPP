@@ -9,11 +9,12 @@ import java.util.*;
 import java.io.IOException;
 
 public class ServiciuReligios {
+    private final String _caleFisier = "C:\\Users\\Andrei\\Desktop\\Agenda-Preot\\src\\Model\\ServiciiReligioase";
    private ArrayList<Data.ServiciuReligios> servicii = new ArrayList<Data.ServiciuReligios>();
 
-   public ServiciuReligios(String path) throws IOException{
+   public ServiciuReligios() throws IOException{
        try {
-          BufferedReader file = new BufferedReader(new FileReader(path));
+          BufferedReader file = new BufferedReader(new FileReader(_caleFisier));
           while(file.ready()) {
               String[] linie = file.readLine().split("@");
               Data.ServiciuReligios serviciu = new Data.ServiciuReligios(linie[0],linie[1],linie[2],linie[3],linie[4]);
@@ -46,4 +47,8 @@ public class ServiciuReligios {
        }
    }
 
+   public ArrayList<Data.ServiciuReligios> afisare() {
+
+       return servicii;
+   }
 }
