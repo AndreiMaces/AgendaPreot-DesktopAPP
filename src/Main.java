@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(new Controller.Calendar().zi("2023" , "Ianuarie", "1").get("text"));
+    public static void main(String[] args) throws IOException {
+            Model.ServiciuReligios s = new Model.ServiciuReligios("C:\\Users\\Andrei\\Desktop\\Agenda-Preot\\src\\Model\\ServiciiReligioase");
     }
 }
