@@ -7,7 +7,7 @@ public class Predica implements IPredica{
 
     private final ArrayList<String> _predici;
     private final String _caleFisier;
-
+    // C:\Users\Andrei\Desktop\Agenda-Preot\src\Model\Predici.txt
     public Predica(String CaleFisier) throws IOException {
         _caleFisier = CaleFisier;
         _predici = new ArrayList<>();
