@@ -9,7 +9,7 @@ import java.util.*;
 import java.io.IOException;
 
 public class ServiciuReligios {
-    private final String _caleFisier = "C:\\Users\\Andrei\\Desktop\\Agenda-Preot\\src\\Model\\ServiciiReligioase";
+    private final String _caleFisier = "src/Model/ServiciiReligioase";
    private ArrayList<Data.ServiciuReligios> servicii = new ArrayList<Data.ServiciuReligios>();
 
    public ServiciuReligios() throws IOException{
@@ -26,9 +26,9 @@ public class ServiciuReligios {
        }
    }
 
-   public void adaugaServiciu(Data.ServiciuReligios serviciu, String path) {
+   public void adaugaServiciu(Data.ServiciuReligios serviciu) {
        try {
-           BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
+           BufferedWriter writer = new BufferedWriter(new FileWriter(_caleFisier, true));
            StringBuilder sb = new StringBuilder(serviciu.getNume());
            sb.append("@");
            sb.append(serviciu.getData());
