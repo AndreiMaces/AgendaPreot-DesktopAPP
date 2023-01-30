@@ -14,6 +14,18 @@ public class GUIPredica {
     }
 
     public JScrollPane Vizualizare() throws IOException {
+        return new JScrollPane(this.PanelVizualizare());
+    }
+
+
+    public JPanel Adaugare()
+    {
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Adaugare predica"));
+        return panel;
+    }
+
+    public JPanel PanelVizualizare() throws IOException {
         var Model = new Predica(_caleFisier);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -48,13 +60,25 @@ public class GUIPredica {
             editButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
                 }
             });
             row.add(editButton, c);
             JButton deleteButton = new JButton("Delete");
             c.gridx = 2;
             row.add(deleteButton, c);
+            int finalI = i;
+            deleteButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Model.StergePredica(finalI);
+                        panel.repaint();
+                        panel.revalidate();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
 
             Border border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
             Border margin = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -62,14 +86,6 @@ public class GUIPredica {
 
             panel.add(row);
         }
-        return new JScrollPane(panel);
-    }
-
-
-    public JPanel Adaugare()
-    {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Adaugare predica"));
         return panel;
     }
 }
