@@ -65,7 +65,11 @@ public class MainGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.getContentPane().remove(currentPanel);
-                currentPanel = new GUIPredica().Adaugare();
+                try {
+                    currentPanel = new GUIPredica().Adaugare();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.getContentPane().add(BorderLayout.CENTER, currentPanel);
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
