@@ -192,7 +192,6 @@ public class GUIPredica
     {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
         JPanel TitlePanel = new JPanel();
         TitlePanel.setMaximumSize(new Dimension(TitlePanel.getMaximumSize().width, 100));
         TitlePanel.setLayout(new GridBagLayout());
@@ -208,7 +207,6 @@ public class GUIPredica
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(textArea);
-
         JPanel PanelButon = new JPanel();
         PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
         PanelButon.setLayout(new GridBagLayout());
@@ -219,7 +217,6 @@ public class GUIPredica
         c.fill = GridBagConstraints.HORIZONTAL;
         JButton submitButton = new JButton("Salveaza predica");
         PanelButon.add(submitButton, c);
-
         panel.add(TitlePanel);
         panel.add(scrollPane);
         panel.add(PanelButon);
@@ -251,13 +248,11 @@ public class GUIPredica
     {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
         JTextArea textArea = new JTextArea(_context.CitestePredica(id));
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(textArea);
         textArea.setEditable(false);
-
         JPanel PanelButon = new JPanel();
         PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
         PanelButon.setLayout(new GridBagLayout());
