@@ -14,7 +14,13 @@ public class Predica implements IPredica{
         BufferedReader br = new BufferedReader(new FileReader(CaleFisier));
         while(br.ready())
         {
-            String predica = br.readLine();
+            String linie = br.readLine();
+            String predica = "";
+            while(!linie.contains("@") && br.ready())
+            {
+                predica += linie + " \n";
+                linie = br.readLine();
+            }
             _predici.add(predica);
         }
     }
@@ -50,7 +56,7 @@ public class Predica implements IPredica{
     private void RescriePredici() throws IOException {
         FileWriter fw = new FileWriter(_caleFisier, false);
         for(var predica : _predici)
-            fw.write(predica + "\n");
+            fw.write(predica + "\n@\n");
         fw.close();
     }
 }
