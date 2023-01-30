@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUIPredica {
-    private String _caleFisier = "C:\\Users\\Andrei\\Desktop\\Agenda-Preot\\src\\Model\\Predici.txt";
+    private String _caleFisier = "src/Model/Predici.txt";
     private final Predica _context;
     public GUIPredica() throws IOException {
 
