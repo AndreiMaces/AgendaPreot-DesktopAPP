@@ -1,7 +1,11 @@
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 
@@ -37,6 +41,9 @@ public class MainGUI {
         JMenuItem MeniuAnunturi2 = new JMenuItem("Adauga");
         MeniuAnunturi.add(MeniuAnunturi1);
         MeniuAnunturi.add(MeniuAnunturi2);
+
+        JLabel MeniuCalendar = new JLabel("Sfinti pomeniti in ziua curenta.");
+        mb.add(MeniuCalendar);
 
         //Adding Components to the frame.
         frame.getContentPane().add(BorderLayout.NORTH, mb);
@@ -119,5 +126,67 @@ public class MainGUI {
                 frame.getContentPane().repaint();
             }
         });
+
+        MeniuCalendar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Controller.Calendar calendar = new Controller.Calendar();
+                String zi = Integer.toString(java.time.LocalDate.now().getDayOfYear());
+                String an = Integer.toString(java.time.LocalDate.now().getYear());
+                String luna = java.time.LocalDate.now().getMonth().toString();
+                JOptionPane.showMessageDialog(frame, calendar.zi(an,traducereLuna(luna),zi).get("text"));
+            }
+        });
+    }
+
+    private String traducereLuna(String luna) {
+        if(luna.equals("JANUARY")) {
+            return  "Ianuarie";
+        }
+        if(luna.equals("FEBRUARY")) {
+            return  "Februarie";
+        }
+
+        if(luna.equals("MARCH")) {
+            return  "Martie";
+        }
+
+        if(luna.equals("APRIL")) {
+            return "Aprilie";
+        }
+
+        if(luna.equals("MAY")) {
+            return  "Mai";
+        }
+
+        if(luna.equals("JUNE")) {
+            return "Iunie";
+        }
+
+        if(luna.equals("JULY")) {
+            return "Iulie";
+        }
+
+        if(luna.equals("AUGUST")) {
+            return "August";
+        }
+
+        if(luna.equals("SEPTEMBER")) {
+            return "Septembrie";
+        }
+
+        if(luna.equals("OCTOBER")) {
+            return "Octombrie";
+        }
+
+        if(luna.equals("NOVEMBER")) {
+            return "Noiembrie";
+        }
+
+        if(luna.equals("DECEMBER")) {
+            return "Decembrie";
+        }
+        return "";
     }
 }
