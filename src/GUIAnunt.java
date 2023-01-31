@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GUIAnunt
 {
-    private String _caleFisier = "C:\\Users\\Andrei\\Desktop\\Agenda-Preot\\src\\Model\\Anunturi.txt";
+    private String _caleFisier = "src/Model/Anunturi.txt";
     private final Anunt _context;
     public GUIAnunt() throws IOException
     {

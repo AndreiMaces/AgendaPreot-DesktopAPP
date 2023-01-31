@@ -28,14 +28,13 @@ public class GUIServiciuReligios {
     }
     private void RandareAdaugare(JPanel returnPanel) {
         returnPanel.removeAll();
+        returnPanel.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
         JPanel gridPanel = new JPanel();
-        JPanel buttonPanel = new JPanel();
         JTextField tNume = new JTextField(15);
         JTextField tData = new JTextField(15);
         JTextField tOra = new JTextField(15);
         JTextField tAdresa = new JTextField(15);
         JTextField tTelefon = new JTextField(15);
-        JButton adauga = new JButton("adauga");
 
         JLabel lNume = new JLabel("Nume:");
         JLabel lData = new JLabel("Data:");
@@ -48,13 +47,26 @@ public class GUIServiciuReligios {
         gridPanel.add(lOra);gridPanel.add(tOra);
         gridPanel.add(lAdresa);gridPanel.add(tAdresa);
         gridPanel.add(lTelefon);gridPanel.add(tTelefon);
+        gridPanel.setMaximumSize(new Dimension(500, 150));
 
-        buttonPanel.add(adauga);
+        JPanel PanelButon = new JPanel();
+        PanelButon.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JButton ButonAdaugare = new JButton("Adauga serviciu religios");
+        PanelButon.add(ButonAdaugare, c);
+        PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
+
         returnPanel.setLayout(new BoxLayout(returnPanel,BoxLayout.Y_AXIS));
         returnPanel.add(gridPanel);
-        returnPanel.add(buttonPanel);
+        returnPanel.add(PanelButon);
 
-        adauga.addActionListener(new ActionListener() {
+
+        ButonAdaugare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -104,10 +116,49 @@ public class GUIServiciuReligios {
     }
     private void RandareVizualizare(JPanel panel)
     {
+        //Initializare panou
         panel.removeAll();
-        String[] col = {"Name", "Date", "Ora", "Adresa", "Telefon"};
+        String[] col = {"Nume", "Data", "Ora", "Adresa", "Telefon"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        panel.setLayout(new GridLayout());
+
+        //GUI titlu
+        JPanel TitlePanel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        TitlePanel.setMaximumSize(new Dimension(TitlePanel.getMaximumSize().width, 100));
+        TitlePanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JLabel title = new JLabel("Servicii Religioase");
+        title.setFont(new Font("Serif", Font.PLAIN, 36));
+        TitlePanel.add(title, c);
+        panel.add(TitlePanel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        //GUI Buton de adaugare serviciu
+        JPanel PanelButon = new JPanel();
+        PanelButon.setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JButton ButonAdaugare = new JButton("Adauga serviciu religios");
+        PanelButon.add(ButonAdaugare, c);
+        PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
+        ButonAdaugare.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RandareAdaugare(panel);
+                panel.revalidate();
+                panel.repaint();
+            }
+        });
+        panel.add(PanelButon);
+
+        //GUI pentru tabel
         try {
             Model.ServiciuReligios ServiciiReligioase = new Model.ServiciuReligios();
             ArrayList<ServiciuReligios> servicii = ServiciiReligioase.afisare();
@@ -117,6 +168,7 @@ public class GUIServiciuReligios {
             }
             JTable table = new JTable(tableModel);
             JScrollPane sp = new JScrollPane(table);
+            sp.setLayout(new ScrollPaneLayout());
             panel.add(sp,BorderLayout.CENTER);
         } catch (IOException e) {
             e.printStackTrace();
