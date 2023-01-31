@@ -7,7 +7,7 @@ public class Calendar {
 
     Model.Calendar InformatiiCalendar;
     public Calendar() {
-        InformatiiCalendar = new Model.Calendar("C:\\Users\\cst-user\\Desktop\\Agenda-Preot\\src\\Model\\Calendar.json");
+        InformatiiCalendar = new Model.Calendar("src/Model/Calendar.json");
     }
 
     public JSONObject an(String a) {
