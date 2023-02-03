@@ -42,7 +42,7 @@ public class MainGUI {
         MeniuAnunturi.add(MeniuAnunturi1);
         MeniuAnunturi.add(MeniuAnunturi2);
 
-        JLabel MeniuCalendar = new JLabel("Sfinti pomeniti in ziua curenta.");
+        JLabel MeniuCalendar = new JLabel("Sarbatoare actuala.");
         mb.add(MeniuCalendar);
 
         //Adding Components to the frame.
@@ -140,7 +140,7 @@ public class MainGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 Controller.Calendar calendar = new Controller.Calendar();
-                String zi = Integer.toString(java.time.LocalDate.now().getDayOfYear());
+                String zi = Integer.toString(java.time.LocalDate.now().getDayOfMonth());
                 String an = Integer.toString(java.time.LocalDate.now().getYear());
                 String luna = java.time.LocalDate.now().getMonth().toString();
                 JOptionPane.showMessageDialog(frame, calendar.zi(an,traducereLuna(luna),zi).get("text"));

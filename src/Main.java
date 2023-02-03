@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class Main {

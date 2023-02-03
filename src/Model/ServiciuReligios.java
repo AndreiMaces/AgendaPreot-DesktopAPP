@@ -26,29 +26,42 @@ public class ServiciuReligios {
        }
    }
 
-   public void adaugaServiciu(Data.ServiciuReligios serviciu) {
-       try {
-           BufferedWriter writer = new BufferedWriter(new FileWriter(_caleFisier, true));
-           StringBuilder sb = new StringBuilder(serviciu.getNume());
-           sb.append("@");
-           sb.append(serviciu.getData());
-           sb.append("@");
-           sb.append(serviciu.getOra());
-           sb.append("@");
-           sb.append(serviciu.getAdresa());
-           sb.append("@");
-           sb.append(serviciu.getNrTelefon());
-           writer.write("\n");
-           writer.write(sb.toString());
-           servicii.add(serviciu);
-           writer.close();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+   public void adaugaServiciu(Data.ServiciuReligios serviciu) throws IOException {
+           servicii.add(0, serviciu);
+           RescrieServicii();
+   }
+
+   public void stergeServiciu(int id) throws IOException {
+       servicii.remove(id);
+       RescrieServicii();
    }
 
    public ArrayList<Data.ServiciuReligios> afisare() {
 
        return servicii;
    }
+
+  public void editeazaServiciu(int id, Data.ServiciuReligios serviciu) throws IOException {
+      servicii.set(id,serviciu);
+      RescrieServicii();
+  }
+
+    private void RescrieServicii() throws IOException {
+        FileWriter writer = new FileWriter(_caleFisier,false);
+        for(var serviciu : servicii) {
+            StringBuilder sb = new StringBuilder(serviciu.getNume());
+            sb.append("@");
+            sb.append(serviciu.getData());
+            sb.append("@");
+            sb.append(serviciu.getOra());
+            sb.append("@");
+            sb.append(serviciu.getAdresa());
+            sb.append("@");
+            sb.append(serviciu.getNrTelefon());
+            writer.write(sb.toString());
+            writer.write("\n");
+        }
+        writer.flush();
+        writer.close();
+    }
 }
