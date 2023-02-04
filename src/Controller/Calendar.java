@@ -19,7 +19,6 @@ public class Calendar {
         return (JSONArray)an(a).get(l);
     }
 
-    //new Controller.Calendar().zi("2023" , "Ianuarie", "1").get("text")
     public JSONObject zi(String a , String l , String z) {
         return (JSONObject) luna(a , l).get(Integer.parseInt(z) - 1);
     }

@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +14,15 @@ public class MainGUI {
 
         //Creating the Frame
         JFrame frame = new JFrame("Agenda Preot");
+        Image icon = Toolkit.getDefaultToolkit().getImage("cross.png");
+        frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
+        frame.setResizable(false);
 
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
+        mb.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         JMenu MeniuServiciiReligioase = new JMenu("Servicii Religioase");
         mb.add(MeniuServiciiReligioase);
         JMenuItem MeniuServiciiReligioase1 = new JMenuItem("Vizualizeaza");

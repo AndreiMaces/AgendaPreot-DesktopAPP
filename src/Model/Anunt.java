@@ -5,53 +5,57 @@ import java.util.ArrayList;
 
 public class Anunt implements IAnunt{
 
-    private final ArrayList<String> _anunturi;
+    private final ArrayList<String> _Anunturi;
     private final String _caleFisier;
-    // C:\Users\Andrei\Desktop\Agenda-Preot\src\Model\Anunturi.txt
-
     public Anunt(String CaleFisier) throws IOException {
         _caleFisier = CaleFisier;
-        _anunturi = new ArrayList<>();
+        _Anunturi = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(CaleFisier));
         while(br.ready())
         {
-            String predica = br.readLine();
-            _anunturi.add(predica);
+            String linie = br.readLine();
+            String Anunt = "";
+            while(!linie.contains("@") && br.ready())
+            {
+                Anunt += linie + " \n";
+                linie = br.readLine();
+            }
+            _Anunturi.add(Anunt);
         }
     }
 
     @Override
-    public void AdaugaAnunt(String predica) throws IOException {
-        _anunturi.add(predica);
-        RescriePredici();
+    public void AdaugaAnunt(String Anunt) throws IOException {
+        _Anunturi.add(Anunt);
+        RescrieAnunturi();
     }
 
     @Override
-    public void EditeazaAnunt(int id, String predica) throws IOException {
-        _anunturi.set(id, predica);
-        RescriePredici();
+    public void EditeazaAnunt(int id, String Anunt) throws IOException {
+        _Anunturi.set(id, Anunt);
+        RescrieAnunturi();
     }
 
     @Override
     public String CitesteAnunt(int id) {
-        return _anunturi.get(id);
+        return _Anunturi.get(id);
     }
 
     @Override
     public void StergeAnunt(int id) throws IOException {
-        _anunturi.remove(id);
-        RescriePredici();
+        _Anunturi.remove(id);
+        RescrieAnunturi();
     }
 
     @Override
     public ArrayList<String> CitesteAnunturi() {
-        return _anunturi;
+        return _Anunturi;
     }
 
-    private void RescriePredici() throws IOException {
+    private void RescrieAnunturi() throws IOException {
         FileWriter fw = new FileWriter(_caleFisier, false);
-        for(var anunt : _anunturi)
-            fw.write(anunt + "\n");
+        for(var Anunt : _Anunturi)
+            fw.write(Anunt + "\n@\n");
         fw.close();
     }
 }

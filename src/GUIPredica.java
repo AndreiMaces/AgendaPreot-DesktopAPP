@@ -1,6 +1,9 @@
 import Enums.LabelPredica;
 import Enums.PanouPredica;
 import Model.Predica;
+import Shared.ElementGUI;
+import Shared.Helper;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -18,21 +21,6 @@ public class GUIPredica {
         public ElementGUIPredica()
         {
             Buton = new ButonPredica();
-        }
-        static public JPanel Titlu(String label)
-        {
-            JPanel TitlePanel = new JPanel();
-            TitlePanel.setMaximumSize(new Dimension(TitlePanel.getMaximumSize().width, 100));
-            TitlePanel.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
-            JLabel title = new JLabel(label);
-            title.setFont(new Font("Serif", Font.PLAIN, 36));
-            TitlePanel.add(title, c);
-            return TitlePanel;
         }
         private JPanel Predica(String text, int i)
         {
@@ -191,10 +179,16 @@ public class GUIPredica {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    _context.StergePredica(_index);
-                    RandeazaVizualizareListaPredici();
-                    _panel.revalidate();
-                    _panel.repaint();
+                    Window parent = SwingUtilities.getWindowAncestor(_panel);
+                    int rezultat = JOptionPane.showConfirmDialog(parent,"Sunteti sigur ca vreti sa stergeti predica?", "Sterge Predica",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if(rezultat == JOptionPane.YES_OPTION) {
+                        _context.StergePredica(_index);
+                        RandeazaVizualizareListaPredici();
+                        _panel.revalidate();
+                        _panel.repaint();
+                    }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -347,7 +341,7 @@ public class GUIPredica {
     private void RandareAdaugare()
     {
         ReconfigureazaPanou();
-        _panel.add(new ElementGUIPredica().Titlu(LabelPredica.TitluAdaugarePredica.getLabel()));
+        _panel.add(ElementGUI.Titlu(LabelPredica.TitluAdaugarePredica.getLabel()));
         _panel.add(new ElementGUIPredica().PanouPredica(PanouPredica.Adaugare, -1));
         _panel.add(new ElementGUIPredica().Buton.ButonAdaugarePredica());
     }
@@ -355,28 +349,26 @@ public class GUIPredica {
     {
         ReconfigureazaPanou();
 
-        _panel.add(new ElementGUIPredica().Titlu(LabelPredica.TitluVizualizareListaPredici.getLabel()));
-        _panel.add(new ElementGUIPredica().PanouListaPredici());
+        _panel.add(ElementGUI.Titlu(LabelPredica.TitluVizualizareListaPredici.getLabel()));
         _panel.add(new ButonPredica().ButonRandareAdaugarePredica());
+        _panel.add(new ElementGUIPredica().PanouListaPredici());
     }
     private void RandeazaEditare(int index)
     {
         ReconfigureazaPanou();
-        _panel.add(new ElementGUIPredica().Titlu(LabelPredica.TitluEditarePredica.getLabel()));
+        _panel.add(ElementGUI.Titlu(LabelPredica.TitluEditarePredica.getLabel()));
         _panel.add(new ElementGUIPredica().PanouPredica(PanouPredica.Editare, index));
         _panel.add(new ElementGUIPredica().Buton.ButonEditarePredica(index));
     }
     private void RandeazaVizualizarePredica(int index)
     {
         ReconfigureazaPanou();
-        _panel.add(new ElementGUIPredica().Titlu(LabelPredica.TitluVizualizarePredica.getLabel()));
+        _panel.add(ElementGUI.Titlu(LabelPredica.TitluVizualizarePredica.getLabel()));
         _panel.add(new ElementGUIPredica().PanouPredica(PanouPredica.Vizualizare, index));
         _panel.add(new ElementGUIPredica().Buton.ButonVizualizareListaPredici());
     }
     private void ReconfigureazaPanou()
     {
-        _panel.removeAll();
-        _panel.setLayout(new BoxLayout(_panel, BoxLayout.Y_AXIS));
-        _panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        Helper.ReconfigureazaPanou(_panel);
     }
 }

@@ -30,24 +30,4 @@ public class ServiciuReligios {
     public String getOra() {
         return ora;
     }
-
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public void setNrTelefon(String nrTelefon) {
-        this.nrTelefon = nrTelefon;
-    }
-
-    public void setNume(String nume) {
-        this.nume = nume;
-    }
-
-    public void setOra(String ora) {
-        this.ora = ora;
-    }
 }
