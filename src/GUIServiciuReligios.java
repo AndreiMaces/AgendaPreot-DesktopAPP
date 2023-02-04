@@ -69,7 +69,7 @@ public class GUIServiciuReligios {
         panel.add(PanelButon);
 
         //GUI pentru tabel
-        JPopupMenu popupMenu =new JPopupMenu();
+        JPopupMenu popupMenu = new JPopupMenu();
         try {
             Model.ServiciuReligios ServiciiReligioase = new Model.ServiciuReligios();
             ArrayList<ServiciuReligios> servicii = ServiciiReligioase.afisare();
@@ -202,7 +202,6 @@ public class GUIServiciuReligios {
             JPanel datePickerPanel = new JPanel();
             datePickerPanel.setLayout(new FlowLayout());
 
-
             JLabel yearLabel = new JLabel("An:");
 
             Integer[] years = new Integer[100];
@@ -237,6 +236,7 @@ public class GUIServiciuReligios {
             JTextField tAdresa = new JTextField(15);
             JTextField tTelefon = new JTextField(15);
             if(metoda.equals("editare")){
+                returnPanel.add(GUIPredica.ElementGUIPredica.Titlu("Editare Serviciu Religios"));
                 tNume.setText(cells.get(0));
                 tOra.setText(cells.get(2));
                 tAdresa.setText(cells.get(3));
@@ -245,7 +245,7 @@ public class GUIServiciuReligios {
                 yearComboBox.setSelectedItem(Integer.parseInt(date[2]));
                 monthComboBox.setSelectedItem(date[1]);
                 dayComboBox.setSelectedItem(Integer.parseInt(date[0]));
-            }
+            } else returnPanel.add(GUIPredica.ElementGUIPredica.Titlu("Adaugare Serviciu Religios"));
 
 
             JLabel lNume = new JLabel("Nume:");

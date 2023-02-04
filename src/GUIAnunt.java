@@ -14,13 +14,12 @@ public class GUIAnunt
     private final Anunt _context;
     public GUIAnunt() throws IOException
     {
-
         _context = new Anunt(_caleFisier);
     }
     public JScrollPane Vizualizare() throws IOException
     {
         JPanel panel = new JPanel();
-        RandeazaVizualizare(panel);
+        RandeazaVizualizareListaPredici(panel);
         return new JScrollPane(panel);
     }
     public JScrollPane Adaugare()
@@ -59,12 +58,12 @@ public class GUIAnunt
         c.gridy = 0;
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
-        JButton submitButton = new JButton("Adauga");
-        PanelButon.add(submitButton, c);
+        JButton ButonAdaugare = new JButton("Adauga");
+        PanelButon.add(ButonAdaugare, c);
         panel.add(TitlePanel);
         panel.add(scrollPane);
         panel.add(PanelButon);
-        submitButton.addActionListener(new ActionListener() {
+        ButonAdaugare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -78,7 +77,7 @@ public class GUIAnunt
                         return;
                     }
                     _context.AdaugaAnunt(textArea.getText());
-                    RandeazaVizualizare(panel);
+                    RandeazaVizualizareListaPredici(panel);
                     panel.revalidate();
                     panel.repaint();
 
@@ -88,7 +87,7 @@ public class GUIAnunt
             }
         });
     }
-    public void RandeazaVizualizare(JPanel panel) throws IOException
+    public void RandeazaVizualizareListaPredici(JPanel panel) throws IOException
     {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -122,11 +121,11 @@ public class GUIAnunt
             c.gridx = 1;
             c.weightx = 0.0;
             JButton editButton = new JButton("Edit");
-            int finalI = i;
+            int index = i;
             editButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    RandeazaEditare(panel , finalI);
+                    RandeazaEditare(panel , index);
                     panel.revalidate();
                     panel.repaint();
                 }
@@ -140,8 +139,8 @@ public class GUIAnunt
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        _context.StergeAnunt(finalI);
-                        RandeazaVizualizare(panel);
+                        _context.StergeAnunt(index);
+                        RandeazaVizualizareListaPredici(panel);
                         panel.revalidate();
                         panel.repaint();
                     } catch (IOException ex) {
@@ -156,7 +155,7 @@ public class GUIAnunt
             viewButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    RandeazaVizualizareId(panel, finalI);
+                    RandeazaVizualizarePredica(panel, index);
                     panel.revalidate();
                     panel.repaint();
                 }
@@ -215,12 +214,12 @@ public class GUIAnunt
         c.gridy = 0;
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
-        JButton submitButton = new JButton("Salveaza Anunt");
-        PanelButon.add(submitButton, c);
+        JButton ButonEditare = new JButton("Salveaza Anunt");
+        PanelButon.add(ButonEditare, c);
         panel.add(TitlePanel);
         panel.add(scrollPane);
         panel.add(PanelButon);
-        submitButton.addActionListener(new ActionListener() {
+        ButonEditare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -234,7 +233,7 @@ public class GUIAnunt
                         return;
                     }
                     _context.EditeazaAnunt(id, textArea.getText());
-                    RandeazaVizualizare(panel);
+                    RandeazaVizualizareListaPredici(panel);
                     panel.revalidate();
                     panel.repaint();
 
@@ -244,7 +243,7 @@ public class GUIAnunt
             }
         });
     }
-    private void RandeazaVizualizareId(JPanel panel, int id)
+    private void RandeazaVizualizarePredica(JPanel panel, int id)
     {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -261,15 +260,15 @@ public class GUIAnunt
         c.gridy = 0;
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
-        JButton submitButton = new JButton("Inapoi");
-        PanelButon.add(submitButton, c);
+        JButton ButonVizualizare = new JButton("Inapoi");
+        PanelButon.add(ButonVizualizare, c);
         panel.add(scrollPane);
         panel.add(PanelButon);
-        submitButton.addActionListener(new ActionListener() {
+        ButonVizualizare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    RandeazaVizualizare(panel);
+                    RandeazaVizualizareListaPredici(panel);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
