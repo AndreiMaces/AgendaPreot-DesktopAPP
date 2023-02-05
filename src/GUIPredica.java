@@ -27,11 +27,7 @@ public class GUIPredica {
             JPanel row = new JPanel();
             row.setMaximumSize(new Dimension(row.getMaximumSize().width, 50));
             row.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
+            GridBagConstraints c = Helper.umpleLatimeButon();
             JLabel stringLabel = new JLabel(text.length() > 28 ? text.substring(0, 25) + "..." : text);
             row.add(stringLabel, c);
 
@@ -108,8 +104,9 @@ public class GUIPredica {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(_textArea.getText().length() < 10) {
+                    if(_textArea.getText().trim().length() < 10) {
                         JOptionPane.showMessageDialog(null, LabelPredica.MesajEroareLimitaCaractere.getLabel());
+                        _textArea.setText(_textArea.getText().trim());
                         return;
                     }
                     if(_textArea.getText().contains("@"))
@@ -117,7 +114,7 @@ public class GUIPredica {
                         JOptionPane.showMessageDialog(null, LabelPredica.MesajEroareDelimitator.getLabel());
                         return;
                     }
-                    _context.AdaugaPredica(_textArea.getText());
+                    _context.AdaugaPredica(_textArea.getText().trim());
                     RandeazaVizualizareListaPredici();
                     _panel.revalidate();
                     _panel.repaint();
@@ -209,16 +206,17 @@ public class GUIPredica {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(_textArea.getText().length() < 10) {
-                        JOptionPane.showMessageDialog(null, "Predica trebuie sa aibe minim 10 de caractere!");
+                    if(_textArea.getText().trim().length() < 10) {
+                        JOptionPane.showMessageDialog(null, LabelPredica.MesajEroareLimitaCaractere.getLabel());
+                        _textArea.setText(_textArea.getText().trim());
                         return;
                     }
                     if(_textArea.getText().contains("@"))
                     {
-                        JOptionPane.showMessageDialog(null, "Predica nu poate contine caracterul @!");
+                        JOptionPane.showMessageDialog(null, LabelPredica.MesajEroareDelimitator.getLabel());
                         return;
                     }
-                    _context.EditeazaPredica(_index, _textArea.getText());
+                    _context.EditeazaPredica(_index, _textArea.getText().trim());
                     RandeazaVizualizareListaPredici();
                     _panel.revalidate();
                     _panel.repaint();
@@ -247,14 +245,9 @@ public class GUIPredica {
             JPanel PanelButon = new JPanel();
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonAdaugarePredica = new JButton(LabelPredica.ButonAdaugarePredica.getLabel());
             ButonAdaugarePredica.addActionListener(new AscultatorButonAdaugarePredica(_textArea));
-            PanelButon.add(ButonAdaugarePredica, c);
+            PanelButon.add(ButonAdaugarePredica, Helper.umpleLatimeButon());
 
             return PanelButon;
         }
@@ -262,15 +255,10 @@ public class GUIPredica {
 
             JPanel PanelButon = new JPanel();
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
 
             JButton ButonRandareAdaugarePredica = new JButton(LabelPredica.ButonAdaugarePredica.getLabel());
             ButonRandareAdaugarePredica.addActionListener(new AscultatorButonRandareAdaugarePredica());
-            PanelButon.add(ButonRandareAdaugarePredica, c);
+            PanelButon.add(ButonRandareAdaugarePredica, Helper.umpleLatimeButon());
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
 
             return PanelButon;
@@ -294,14 +282,9 @@ public class GUIPredica {
             JPanel PanelButon = new JPanel();
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonEditarePredica = new JButton(LabelPredica.ButonEditarePredica.getLabel());
             ButonEditarePredica.addActionListener(new AscultatorButonEditarePredica(_textArea, index));
-            PanelButon.add(ButonEditarePredica, c);
+            PanelButon.add(ButonEditarePredica, Helper.umpleLatimeButon());
 
             return PanelButon;
         }
@@ -309,14 +292,9 @@ public class GUIPredica {
             JPanel PanouButon = new JPanel();
             PanouButon.setMaximumSize(new Dimension(PanouButon.getMaximumSize().width, 80));
             PanouButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonVizualizareListaPredici = new JButton(LabelPredica.ButonVizualizareListaPredici.getLabel());
             ButonVizualizareListaPredici.addActionListener(new AscultatorButonVizualizareListaPredici());
-            PanouButon.add(ButonVizualizareListaPredici, c);
+            PanouButon.add(ButonVizualizareListaPredici, Helper.umpleLatimeButon());
             return PanouButon;
         }
     }

@@ -1,6 +1,7 @@
 package Shared;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Helper {
     public static String formateazaData(String zi, String luna, String an) {
@@ -17,5 +18,14 @@ public class Helper {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    }
+
+    public static GridBagConstraints umpleLatimeButon() {
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        return c;
     }
 }

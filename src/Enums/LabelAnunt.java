@@ -10,7 +10,7 @@ public enum LabelAnunt {
     TitluVizualizareAnunt("Vizualizare Anunt"),
     TitluAdaugareAnunt("Adaugare Anunt"),
     TitluEditareAnunt("Editare Anunt"),
-    MesajEroareLimitaCaractere("Anunt trebuie sa aibe minim 10 de caractere!"),
+    MesajEroareLimitaCaractere("Anunt trebuie sa aibe minim 10 de caractere!\nSpatiile de la inceput si sfarsit nu sunt luate in considerare."),
     MesajEroareDelimitator("Anunt nu poate contine caracterul @!");
     private final String _label;
 

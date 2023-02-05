@@ -2,6 +2,7 @@ import Enums.LabelAnunt;
 import Enums.PanouAnunt;
 import Model.Anunt;
 import Shared.ElementGUI;
+import Shared.Helper;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,11 +27,7 @@ public class GUIAnunt {
             JPanel row = new JPanel();
             row.setMaximumSize(new Dimension(row.getMaximumSize().width, 50));
             row.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
+            GridBagConstraints c = Helper.umpleLatimeButon();
             JLabel stringLabel = new JLabel(text.length() > 28 ? text.substring(0, 25) + "..." : text);
             row.add(stringLabel, c);
 
@@ -107,8 +104,9 @@ public class GUIAnunt {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(_textArea.getText().length() < 10) {
+                    if(_textArea.getText().trim().length() < 10) {
                         JOptionPane.showMessageDialog(null, LabelAnunt.MesajEroareLimitaCaractere.getLabel());
+                        _textArea.setText(_textArea.getText().trim());
                         return;
                     }
                     if(_textArea.getText().contains("@"))
@@ -116,7 +114,7 @@ public class GUIAnunt {
                         JOptionPane.showMessageDialog(null, LabelAnunt.MesajEroareDelimitator.getLabel());
                         return;
                     }
-                    _context.AdaugaAnunt(_textArea.getText());
+                    _context.AdaugaAnunt(_textArea.getText().trim());
                     RandeazaVizualizareListaAnunturi();
                     _panel.revalidate();
                     _panel.repaint();
@@ -208,13 +206,14 @@ public class GUIAnunt {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(_textArea.getText().length() < 10) {
-                        JOptionPane.showMessageDialog(null, "Anunt trebuie sa aibe minim 10 de caractere!");
+                    if(_textArea.getText().trim().length() < 10) {
+                        JOptionPane.showMessageDialog(null, LabelAnunt.MesajEroareLimitaCaractere.getLabel());
+                        _textArea.setText(_textArea.getText().trim());
                         return;
                     }
                     if(_textArea.getText().contains("@"))
                     {
-                        JOptionPane.showMessageDialog(null, "Anunt nu poate contine caracterul @!");
+                        JOptionPane.showMessageDialog(null, LabelAnunt.MesajEroareDelimitator.getLabel());
                         return;
                     }
                     _context.EditeazaAnunt(_index, _textArea.getText());
@@ -246,14 +245,9 @@ public class GUIAnunt {
             JPanel PanelButon = new JPanel();
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonAdaugareAnunt = new JButton(LabelAnunt.ButonAdaugareAnunt.getLabel());
             ButonAdaugareAnunt.addActionListener(new AscultatorButonAdaugareAnunt(_textArea));
-            PanelButon.add(ButonAdaugareAnunt, c);
+            PanelButon.add(ButonAdaugareAnunt, Helper.umpleLatimeButon());
 
             return PanelButon;
         }
@@ -261,15 +255,9 @@ public class GUIAnunt {
 
             JPanel PanelButon = new JPanel();
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
-
             JButton ButonRandareAdaugareAnunt = new JButton(LabelAnunt.ButonAdaugareAnunt.getLabel());
             ButonRandareAdaugareAnunt.addActionListener(new AscultatorButonRandareAdaugareAnunt());
-            PanelButon.add(ButonRandareAdaugareAnunt, c);
+            PanelButon.add(ButonRandareAdaugareAnunt, Helper.umpleLatimeButon());
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
 
             return PanelButon;
@@ -293,14 +281,9 @@ public class GUIAnunt {
             JPanel PanelButon = new JPanel();
             PanelButon.setMaximumSize(new Dimension(PanelButon.getMaximumSize().width, 80));
             PanelButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonEditareAnunt = new JButton(LabelAnunt.ButonEditareAnunt.getLabel());
             ButonEditareAnunt.addActionListener(new AscultatorButonEditareAnunt(_textArea, index));
-            PanelButon.add(ButonEditareAnunt, c);
+            PanelButon.add(ButonEditareAnunt, Helper.umpleLatimeButon());
 
             return PanelButon;
         }
@@ -308,14 +291,9 @@ public class GUIAnunt {
             JPanel PanouButon = new JPanel();
             PanouButon.setMaximumSize(new Dimension(PanouButon.getMaximumSize().width, 80));
             PanouButon.setLayout(new GridBagLayout());
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1.0;
-            c.fill = GridBagConstraints.HORIZONTAL;
             JButton ButonVizualizareListaAnunturi = new JButton(LabelAnunt.ButonVizualizareListaAnunturi.getLabel());
             ButonVizualizareListaAnunturi.addActionListener(new AscultatorButonVizualizareListaAnunturi());
-            PanouButon.add(ButonVizualizareListaAnunturi, c);
+            PanouButon.add(ButonVizualizareListaAnunturi, Helper.umpleLatimeButon());
             return PanouButon;
         }
     }

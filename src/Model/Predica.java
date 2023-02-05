@@ -27,7 +27,7 @@ public class Predica implements IPredica{
 
     @Override
     public void AdaugaPredica(String predica) throws IOException {
-        _predici.add(predica);
+        _predici.add(0,predica);
         RescriePredici();
     }
 

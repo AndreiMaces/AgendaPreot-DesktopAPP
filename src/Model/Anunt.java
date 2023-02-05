@@ -26,7 +26,7 @@ public class Anunt implements IAnunt{
 
     @Override
     public void AdaugaAnunt(String Anunt) throws IOException {
-        _Anunturi.add(Anunt);
+        _Anunturi.add(0,Anunt);
         RescrieAnunturi();
     }
 

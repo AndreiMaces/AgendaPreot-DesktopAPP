@@ -10,7 +10,7 @@ public enum LabelPredica {
     TitluVizualizarePredica("Vizualizare predica"),
     TitluAdaugarePredica("Adaugare predica"),
     TitluEditarePredica("Editare predica"),
-    MesajEroareLimitaCaractere("Predica trebuie sa aibe minim 10 de caractere!"),
+    MesajEroareLimitaCaractere("Predica trebuie sa aibe minim 10 de caractere!\nSpatiile de la inceput si sfarsit nu sunt luate in considerare."),
     MesajEroareDelimitator("Predica nu poate contine caracterul @!");
     private final String _label;
 
