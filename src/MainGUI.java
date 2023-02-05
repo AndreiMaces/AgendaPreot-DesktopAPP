@@ -1,3 +1,5 @@
+import Shared.Helper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,11 +11,11 @@ import java.io.IOException;
 
 public class MainGUI {
     private JComponent currentPanel;
-    public MainGUI()
-    {
+    public MainGUI() throws IOException {
 
         //Creating the Frame
         JFrame frame = new JFrame("Agenda Preot");
+        frame.setFont(new Font(Helper.font, Font.PLAIN, 14));
         Image icon = Toolkit.getDefaultToolkit().getImage("cross.png");
         frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +121,11 @@ public class MainGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.getContentPane().remove(currentPanel);
-                currentPanel = new GUIServiciuReligios().Vizualizare();
+                try {
+                    currentPanel = new GUIServiciuReligios().Vizualizare();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.getContentPane().add(BorderLayout.CENTER, currentPanel);
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
@@ -136,7 +142,6 @@ public class MainGUI {
                 frame.getContentPane().repaint();
             }
         });
-
         MeniuCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -145,58 +150,8 @@ public class MainGUI {
                 String zi = Integer.toString(java.time.LocalDate.now().getDayOfMonth());
                 String an = Integer.toString(java.time.LocalDate.now().getYear());
                 String luna = java.time.LocalDate.now().getMonth().toString();
-                JOptionPane.showMessageDialog(frame, calendar.zi(an,traducereLuna(luna),zi).get("text"));
+                JOptionPane.showMessageDialog(frame, calendar.zi(an, Helper.traducereLuna(luna),zi).get("text"));
             }
         });
-    }
-
-    private String traducereLuna(String luna) {
-        if(luna.equals("JANUARY")) {
-            return  "Ianuarie";
-        }
-        if(luna.equals("FEBRUARY")) {
-            return  "Februarie";
-        }
-
-        if(luna.equals("MARCH")) {
-            return  "Martie";
-        }
-
-        if(luna.equals("APRIL")) {
-            return "Aprilie";
-        }
-
-        if(luna.equals("MAY")) {
-            return  "Mai";
-        }
-
-        if(luna.equals("JUNE")) {
-            return "Iunie";
-        }
-
-        if(luna.equals("JULY")) {
-            return "Iulie";
-        }
-
-        if(luna.equals("AUGUST")) {
-            return "August";
-        }
-
-        if(luna.equals("SEPTEMBER")) {
-            return "Septembrie";
-        }
-
-        if(luna.equals("OCTOBER")) {
-            return "Octombrie";
-        }
-
-        if(luna.equals("NOVEMBER")) {
-            return "Noiembrie";
-        }
-
-        if(luna.equals("DECEMBER")) {
-            return "Decembrie";
-        }
-        return "";
     }
 }
